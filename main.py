@@ -1,5 +1,4 @@
 import os
-import asyncio
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import JSONResponse
@@ -8,7 +7,7 @@ from fastapi.responses import JSONResponse
 from agents import Agent, Runner 
 from agents.extensions.models.litellm_model import LitellmModel
 from agents.mcp import MCPServerSse
-from agents.run_context import RunContext
+from agents import run_context
 
 # == Load env ==
 from dotenv import load_dotenv
@@ -32,7 +31,7 @@ async def init_agent():
     global agent, exit_stack
 
     # 1) Start MCP SSE server connection
-    system_monitor_mcp =  MCPServerSse.create(
+    system_monitor_mcp =  MCPServerSse(
         name="SystemMonitorMCP",
         params={
             "url": REMOTE_URL,
@@ -63,7 +62,7 @@ async def init_agent():
 @app.post("/chat")
 async def chat(req: ChatRequest):
     try:
-        ctx = RunContext()
+        ctx = run_context.RunContext()
         result = await Runner.run(agent, req.message, context=ctx)
         return JSONResponse(content={"response": result.final_output})
     except Exception as e:
