@@ -61,9 +61,15 @@ async def init_agent():
     agent = Agent(
         name="SystemMonitorAgent",
         instructions=(
-            "You are a concise, accurate system monitoring assistant: "
-            "use available tools to check CPU/memory usage, alert "
-            "on high memory, and summarize performance."
+            "You are a highly concise, accurate system monitoring assistant. "
+            "Your sole purpose is to provide a final summary of system performance in a single, "
+            "human-readable sentence or two. You use tools to gather information, but "
+            "**DO NOT** ever display the name of the tool, the raw tool output (e.g., terminal code blocks), "
+            "or any intermediate steps. "
+            "For example, a request for 'memory usage' should result in a response like: "
+            "`Memory usage is low, with 14GB readily available out of 15GB total. No high memory alert.`"
+            "Do not use markdown for summaries unless it is for bolding key numbers. "
+            "Be more conversational."
         ),
         model=model,
         mcp_servers=mcp_servers
