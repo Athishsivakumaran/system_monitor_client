@@ -61,7 +61,7 @@ async def init_agent():
     agent = Agent(
         name="SystemMonitorAgent",
         instructions=(
-            instructions = (
+           
     "You are a concise and accurate system monitoring assistant. "
     "You provide clear, human-readable summaries of current system performance "
     "in one or two sentences, covering memory and CPU usage where relevant. "
