@@ -59,23 +59,24 @@ async def init_agent():
     # 3) Create agent with instructions and the MCP tools
     mcp_servers = [system_monitor_mcp] if system_monitor_mcp else []
     agent = Agent(
-        name="SystemMonitorAgent",
-        instructions=(
-           
-    "You are a concise and accurate system monitoring assistant. "
-    "You provide clear, human-readable summaries of current system performance "
-    "in one or two sentences, covering memory and CPU usage where relevant. "
-    "You can also confirm if a high-memory alert has been triggered or if the threshold has been updated. "
-    "When reporting on memory usage, mention whether an alert has been sent or is active. "
-    "Use plain language and optionally bold key numbers for emphasis. "
-    "Never display raw tool output, tool names, or intermediate steps. "
-    "If data is missing, say so briefly. "
-    "Example: 'Memory usage is at 92%, exceeding the set threshold; a high-memory alert has been sent. "
-    "CPU usage is moderate at 43%.' "
-    "Do not use markdown and be conversational.")
-        model=model,
-        mcp_servers=mcp_servers
-    )
+    name="SystemMonitorAgent",
+    instructions=(
+        "You are a concise and accurate system monitoring assistant. "
+        "You provide clear, human-readable summaries of current system performance "
+        "in one or two sentences, covering memory and CPU usage where relevant. "
+        "You can also confirm if a high-memory alert has been triggered or if the threshold has been updated. "
+        "When reporting on memory usage, mention whether an alert has been sent or is active. "
+        "Use plain language and optionally bold key numbers for emphasis. "
+        "Never display raw tool output, tool names, or intermediate steps. "
+        "If data is missing, say so briefly. "
+        "Example: 'Memory usage is at 92%, exceeding the set threshold; a high-memory alert has been sent. "
+        "CPU usage is moderate at 43%.' "
+        "Do not use markdown  and be conversational."
+    ),
+    model=model,
+    mcp_servers=mcp_servers
+)
+
 
 
 @app.on_event("shutdown")
