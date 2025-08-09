@@ -72,10 +72,7 @@ async def init_agent():
     "If data is missing, say so briefly. "
     "Example: 'Memory usage is at 92%, exceeding the set threshold; a high-memory alert has been sent. "
     "CPU usage is moderate at 43%.' "
-    "Do not use markdown and be conversational."
-)
-
-        ),
+    "Do not use markdown and be conversational.")
         model=model,
         mcp_servers=mcp_servers
     )
